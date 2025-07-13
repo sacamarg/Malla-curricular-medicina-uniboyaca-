@@ -24,21 +24,27 @@ const materias = [
 const container = document.getElementById("malla-container");
 
 function isApproved(nombre) {
-    const el = document.querySelector(`[data-nombre="${nombre}"]`);
+    const el = document.querySelector(`[data-nombre="{nombre}"]`.replace("{nombre}", nombre));
     return el && el.classList.contains("aprobada");
 }
 
 function createMateriaElement(m) {
     const matDiv = document.createElement("div");
-    matDiv.className = `materia ${m.area}`;
+    matDiv.className = `materia {area}`.replace("{area}", m.area);
     matDiv.setAttribute("data-nombre", m.nombre);
-    matDiv.innerHTML = `<span>${m.nombre}</span><span>${m.creditos} créditos</span>`;
+    matDiv.innerHTML = `<span>{nombre}</span><span>{creditos} créditos</span>`
+        .replace("{nombre}", m.nombre)
+        .replace("{creditos}", m.creditos);
 
     const updateStatus = () => {
         if (matDiv.classList.contains("aprobada")) {
-            matDiv.innerHTML = `<span>${m.nombre} ✅</span><span>${m.creditos} créditos</span>`;
+            matDiv.innerHTML = `<span>{nombre} ✅</span><span>{creditos} créditos</span>`
+                .replace("{nombre}", m.nombre)
+                .replace("{creditos}", m.creditos);
         } else {
-            matDiv.innerHTML = `<span>${m.nombre}</span><span>${m.creditos} créditos</span>`;
+            matDiv.innerHTML = `<span>{nombre}</span><span>{creditos} créditos</span>`
+                .replace("{nombre}", m.nombre)
+                .replace("{creditos}", m.creditos);
         }
     };
 
